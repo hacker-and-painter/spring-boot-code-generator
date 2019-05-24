@@ -5,6 +5,7 @@ import com.softdev.system.generator.entity.ReturnT;
 import com.softdev.system.generator.util.CodeGeneratorTool;
 import com.softdev.system.generator.util.FreemarkerTool;
 import freemarker.template.TemplateException;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,8 +112,16 @@ public class IndexController {
 
     }
 
+    /**
+     * 输入表名和字段名生成建表语句(暂只支出postgresql)
+     * TODO 支持生成mysql建表语句
+     * @param tableName 表名
+     * @param fields    字段名
+     * @return
+     */
     @GetMapping("/sqlGenerate")
     @ResponseBody
+    @ApiOperation("输入表名和字段名生成建表语句")
     public String sqlGenerate(@RequestParam String tableName, String fields) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("CREATE TABLE \"public\".\"").append(tableName).append("\" (\n").append("\"id\" varchar(255) NOT NULL,\n");
