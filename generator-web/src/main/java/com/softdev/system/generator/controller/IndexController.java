@@ -9,9 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,6 +17,7 @@ import java.util.Map;
 
 /**
  * spring boot code generator
+ *
  * @author zhengk/moshow
  */
 @Controller
@@ -28,18 +27,18 @@ public class IndexController {
     @Autowired
     private FreemarkerTool freemarkerTool;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
         return "index";
     }
 
-    @RequestMapping("/genCode")
+    @PostMapping("/genCode")
     @ResponseBody
     public ReturnT<Map<String, String>> codeGenerate(String tableSql,
                                                      //2019-2-10 liutf 修改为@RequestParam参数校验
-                                                     @RequestParam(required = false, defaultValue = "大狼狗") String authorName,
-                                                     @RequestParam(required = false, defaultValue = "com.softdev.system")String packageName,
-                                                     @RequestParam(required = false, defaultValue = "ApiReturnUtil")String returnUtil
+                                                     @RequestParam(required = false, defaultValue = "Gao Hang Hang") String authorName,
+                                                     @RequestParam(required = false, defaultValue = "com.gaohanghang.system") String packageName,
+                                                     @RequestParam(required = false, defaultValue = "ApiReturnUtil") String returnUtil
     ) {
 
 
@@ -77,6 +76,11 @@ public class IndexController {
             result.put("entity", freemarkerTool.processString("code-generator/jpa/entity.ftl", params));
             result.put("repository", freemarkerTool.processString("code-generator/jpa/repository.ftl", params));
             result.put("jpacontroller", freemarkerTool.processString("code-generator/jpa/jpacontroller.ftl", params));
+            //jpa-new
+            result.put("jpa-new-entity", freemarkerTool.processString("code-generator/jpa-new/entity.ftl", params));
+            result.put("jpa-new-repository", freemarkerTool.processString("code-generator/jpa-new/repository.ftl", params));
+            result.put("jpa-new-controller", freemarkerTool.processString("code-generator/jpa-new/jpacontroller.ftl", params));
+            result.put("jpa-new-service", freemarkerTool.processString("code-generator/jpa-new/service.ftl", params));
             //jdbc template
             result.put("jtdao", freemarkerTool.processString("code-generator/jdbc-template/jtdao.ftl", params));
             result.put("jtdaoimpl", freemarkerTool.processString("code-generator/jdbc-template/jtdaoimpl.ftl", params));
@@ -91,7 +95,7 @@ public class IndexController {
 
             // 计算,生成代码行数
             int lineNum = 0;
-            for (Map.Entry<String, String> item: result.entrySet()) {
+            for (Map.Entry<String, String> item : result.entrySet()) {
                 if (item.getValue() != null) {
                     lineNum += StringUtils.countMatches(item.getValue(), "\n");
                 }
@@ -102,9 +106,31 @@ public class IndexController {
             return new ReturnT<>(result);
         } catch (IOException | TemplateException e) {
             log.error(e.getMessage(), e);
-            return new ReturnT<>(ReturnT.FAIL_CODE, "表结构解析失败"+e.getMessage());
+            return new ReturnT<>(ReturnT.FAIL_CODE, "表结构解析失败" + e.getMessage());
         }
 
     }
 
+    @GetMapping("/sqlGenerate")
+    @ResponseBody
+    public String sqlGenerate(@RequestParam String tableName, String fields) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("CREATE TABLE \"public\".\"").append(tableName).append("\" (\n").append("\"id\" varchar(255) NOT NULL,\n");
+
+        String[] fieldsArr = fields.split(",");
+        for (String fieldName : fieldsArr) {
+            stringBuilder.append("\"").append(fieldName).append("\"").append(" varchar(255),\n");
+
+        }
+
+        stringBuilder.append("CONSTRAINT ").append("\"").append(tableName).append("_pkey").append("\"").append(" PRIMARY KEY (\"id\")\n" +
+                ");\n");
+
+        stringBuilder.append("ALTER TABLE \"public\".\"").append(tableName).append("\"\n").append("OWNER TO \"postgres\";\n");
+
+        stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"id\" IS '主键';\n");
+
+
+        return stringBuilder.toString();
+    }
 }
