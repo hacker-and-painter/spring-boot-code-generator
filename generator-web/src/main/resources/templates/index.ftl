@@ -240,8 +240,9 @@ CREATE TABLE `userinfo` (
                 <div class="btn-group" role="group" aria-label="First group">
                     <button type="button" class="btn btn-default generator" id="jpa-new-entity">jpa-entity</button>
                     <button type="button" class="btn btn-default generator" id="jpa-new-repository">repository</button>
-<#--                    <button type="button" class="btn btn-default generator" id="jpa-new-service">service</button>-->
+                    <button type="button" class="btn btn-default generator" id="jpa-new-service">service</button>
                     <button type="button" class="btn btn-default generator" id="jpa-new-controller">controller</button>
+                    <button type="button" class="btn btn-default generator" id="jpa-new-controller-new">controller-new</button>
                 </div>
             </div>
         </div>
