@@ -59,6 +59,21 @@ public class ${classInfo.className}Service {
     }
 
     /**
+    * 查询所有
+    */
+    public Object findAll(${classInfo.className} ${classInfo.className?uncap_first}){
+        //创建匹配器，需要查询条件请修改此处代码
+        ExampleMatcher matcher = ExampleMatcher.matchingAll();
+
+        //创建实例
+        Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
+
+        return ${classInfo.className?uncap_first}Repository.findAll(example);
+    }
+
+
+
+    /**
     * 分页查询
     */
     public Object list(${classInfo.className} ${classInfo.className?uncap_first},

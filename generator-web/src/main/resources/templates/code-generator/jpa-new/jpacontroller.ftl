@@ -44,6 +44,20 @@ public class ${classInfo.className}Controller {
         }
     }
 
+    @ApiOperation("查询所有")
+    @GetMapping("/findAll")
+    public Object findAll(${classInfo.className} ${classInfo.className?uncap_first}) {
+
+        //创建匹配器，需要查询条件请修改此处代码
+        ExampleMatcher matcher = ExampleMatcher.matchingAll();
+
+        //创建实例
+        Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
+
+        return ${classInfo.className?uncap_first}Repository.findAll(example);
+    }
+
+
     @ApiOperation("查询")
     @GetMapping("/find")
     public Object find(String id){
@@ -71,5 +85,6 @@ public class ${classInfo.className}Controller {
 
             return ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
     }
+
 
 }
