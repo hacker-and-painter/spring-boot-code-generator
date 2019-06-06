@@ -1,7 +1,7 @@
 server:
   port: 1234
-  servlet:
-      context-path: /generator
+#  servlet:
+#      context-path: /generator
 
 tomcat:
     remote-ip-header: x-forward-for
