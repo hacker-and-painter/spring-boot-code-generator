@@ -44,7 +44,7 @@ public class ${classInfo.className}Controller {
         return ${classInfo.className?uncap_first}Service.find(id);
     }
 
-    @ApiOperation("查询")
+    @ApiOperation("查询所有")
     @GetMapping("/findAll")
     public Object findAll(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.findAll(${classInfo.className?uncap_first});

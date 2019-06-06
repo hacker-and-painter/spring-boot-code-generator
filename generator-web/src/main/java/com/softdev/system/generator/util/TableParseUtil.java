@@ -6,6 +6,7 @@ import com.softdev.system.generator.entity.FieldInfo;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -179,7 +180,7 @@ public class TableParseUtil {
                     } else if (columnLine.contains("double")) {
                         fieldClass = Double.class.getSimpleName();
                     } else if (columnLine.contains("datetime") || columnLine.contains("timestamp")) {
-                        fieldClass = Date.class.getSimpleName();
+                        fieldClass = LocalDateTime.class.getSimpleName();
                     } else if (columnLine.contains("varchar") || columnLine.contains(" text")|| columnLine.contains("char")
                             || columnLine.contains("clob")||columnLine.contains("blob")||columnLine.contains("json")) {
                         fieldClass = String.class.getSimpleName();
