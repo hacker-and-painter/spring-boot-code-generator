@@ -21,6 +21,9 @@ public class ${classInfo.className} implements Serializable {
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
     @ApiModelProperty("${fieldItem.fieldComment}")
+    <#if fieldItem.fieldClass == 'LocalDateTime'>
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    </#if>
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
 </#list>
