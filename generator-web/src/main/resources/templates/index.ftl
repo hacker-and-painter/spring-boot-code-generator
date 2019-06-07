@@ -242,7 +242,6 @@ CREATE TABLE `userinfo` (
                     <button type="button" class="btn btn-default generator" id="jpa-new-repository">repository</button>
                     <button type="button" class="btn btn-default generator" id="jpa-new-service">service</button>
                     <button type="button" class="btn btn-default generator" id="jpa-new-controller">controller</button>
-                    <button type="button" class="btn btn-default generator" id="jpa-new-controller-new">controller-new</button>
                 </div>
             </div>
         </div>

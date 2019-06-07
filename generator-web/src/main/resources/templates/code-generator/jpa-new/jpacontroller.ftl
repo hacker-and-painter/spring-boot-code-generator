@@ -24,49 +24,30 @@ import java.util.Map;
 public class ${classInfo.className}Controller {
 
     @Autowired
-    private ${classInfo.className}Repository ${classInfo.className?uncap_first}Repository;
+    private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
 
     @ApiOperation("新增或编辑")
     @PostMapping("/save")
     public Object save(${classInfo.className} ${classInfo.className?uncap_first}){
-        return ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
+        return ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
     }
 
     @ApiOperation("删除")
     @DeleteMapping("/delete")
     public Object delete(String id){
-        Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
-        if(${classInfo.className?uncap_first}.isPresent()){
-            ${classInfo.className?uncap_first}Repository.deleteById(id);
-            return new Result(true,StatusCode.OK,"删除成功");
-        }else{
-            return new Result(true,StatusCode.ERROR,"没有找到该对象");
-        }
+        return ${classInfo.className?uncap_first}Service.delete(id);
     }
-
-    @ApiOperation("查询所有")
-    @GetMapping("/findAll")
-    public Object findAll(${classInfo.className} ${classInfo.className?uncap_first}) {
-
-        //创建匹配器，需要查询条件请修改此处代码
-        ExampleMatcher matcher = ExampleMatcher.matchingAll();
-
-        //创建实例
-        Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
-
-        return ${classInfo.className?uncap_first}Repository.findAll(example);
-    }
-
 
     @ApiOperation("查询")
     @GetMapping("/find")
     public Object find(String id){
-        Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
-        if(${classInfo.className?uncap_first}.isPresent()){
-            return new Result(true,StatusCode.OK,"成功",${classInfo.className?uncap_first}.get());
-        }else{
-            return new Result(true,StatusCode.ERROR,"没有找到该对象");
-        }
+        return ${classInfo.className?uncap_first}Service.find(id);
+    }
+
+    @ApiOperation("查询所有")
+    @GetMapping("/findAll")
+    public Object findAll(${classInfo.className} ${classInfo.className?uncap_first}){
+        return ${classInfo.className?uncap_first}Service.findAll(${classInfo.className?uncap_first});
     }
 
     @ApiOperation("分页查询")
@@ -75,16 +56,7 @@ public class ${classInfo.className}Controller {
                         @RequestParam(required = false, defaultValue = "1") int pageNumber,
                         @RequestParam(required = false, defaultValue = "10") int pageSize) {
 
-            //创建匹配器，需要查询条件请修改此处代码
-            ExampleMatcher matcher = ExampleMatcher.matchingAll();
-
-            //创建实例
-            Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
-            //分页构造
-            Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);
-
-            return ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
+        return ${classInfo.className?uncap_first}Service.list(${classInfo.className?uncap_first}, pageNumber, pageSize);
     }
-
 
 }
