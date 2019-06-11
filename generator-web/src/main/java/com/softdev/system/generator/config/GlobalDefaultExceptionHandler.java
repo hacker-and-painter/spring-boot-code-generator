@@ -16,7 +16,6 @@ public class GlobalDefaultExceptionHandler {
 	@ResponseBody
 	public ApiReturnObject defaultExceptionHandler(HttpServletRequest req,Exception e) {
 		e.printStackTrace();
-		//return new ApiReturnObject("01","server error", e.getMessage());
 		return ApiReturnUtil.error("服务器异常",e.getMessage());
 	}
 	

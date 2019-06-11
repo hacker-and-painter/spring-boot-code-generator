@@ -71,8 +71,6 @@ public class ${classInfo.className}Service {
         return ${classInfo.className?uncap_first}Repository.findAll(example);
     }
 
-
-
     /**
     * 分页查询
     */
