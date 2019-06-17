@@ -82,6 +82,9 @@ public class IndexController {
             result.put("jpa-new-repository", freemarkerTool.processString("code-generator/jpa-new/repository.ftl", params));
             result.put("jpa-new-controller", freemarkerTool.processString("code-generator/jpa-new/jpacontroller.ftl", params));
             result.put("jpa-new-service", freemarkerTool.processString("code-generator/jpa-new/service.ftl", params));
+            //Util
+            result.put("util", freemarkerTool.processString("code-generator/util/util.ftl", params));
+
             //jdbc template
             result.put("jtdao", freemarkerTool.processString("code-generator/jdbc-template/jtdao.ftl", params));
             result.put("jtdaoimpl", freemarkerTool.processString("code-generator/jdbc-template/jtdaoimpl.ftl", params));
