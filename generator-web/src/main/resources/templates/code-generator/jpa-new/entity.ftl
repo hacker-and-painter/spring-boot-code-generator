@@ -12,6 +12,12 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="${classInfo.tableName}")
+
+<#list classInfo.fieldList as fieldItem >
+    <#if fieldItem.fieldName == 'createTime'>
+@EntityListeners(AuditingEntityListener.class)
+    </#if>
+</#list>
 public class ${classInfo.className} implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -23,6 +29,12 @@ public class ${classInfo.className} implements Serializable {
     @ApiModelProperty("${fieldItem.fieldComment}")
     <#if fieldItem.fieldClass == 'LocalDateTime'>
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    </#if>
+    <#if fieldItem.fieldName == 'createTime'>
+    @CreatedDate
+    </#if>
+    <#if fieldItem.fieldName == 'updateTime'>
+    @LastModifiedDate
     </#if>
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
