@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="${classInfo.tableName}")
-
 <#list classInfo.fieldList as fieldItem >
     <#if fieldItem.fieldName == 'createTime'>
 @EntityListeners(AuditingEntityListener.class)
@@ -28,7 +27,7 @@ public class ${classInfo.className} implements Serializable {
 <#list classInfo.fieldList as fieldItem >
     @ApiModelProperty("${fieldItem.fieldComment}")
     <#if fieldItem.fieldClass == 'LocalDateTime'>
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     </#if>
     <#if fieldItem.fieldName == 'createTime'>
     @CreatedDate
