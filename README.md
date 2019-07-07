@@ -43,7 +43,7 @@
 
 #### bean get set
 
-项目中经常会遇到需要 get bean 所有属性和 set bean 所有属性的情况
+项目中经常会遇到需要 get bean 所有属性和 set bean 所有属性的情况，添加此功能方便开发
 
 ![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707212234.png)
 
