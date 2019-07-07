@@ -35,15 +35,32 @@
 
 ![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190524200756.png)
 
-**jpa entity**
+### 添加功能
 
-![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190524201019.png)
+#### JPA-NEW(将JPA修改为适合自己项目的模板)
 
-**jpa repository**
+![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707211702.png)
 
-![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190524201141.png)
+#### bean get set
 
-**jpa controller**
+项目中经常会遇到需要 get bean 所有属性和 set bean 所有属性的情况
 
-![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190524201215.png)
+![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707212234.png)
+
+#### SQL
+
+使用Navicat 通常需要写select、insert、update、delete语句，比较麻烦，使用此功能只需要填充数据即可使用
+
+![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707212624.png)
+
+![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707212703.png)
+
+![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707212728.png)
+
+![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707212756.png)
+
+
+
+
+
 
