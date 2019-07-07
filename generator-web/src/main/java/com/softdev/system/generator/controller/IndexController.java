@@ -84,7 +84,6 @@ public class IndexController {
             result.put("jpa-new-service", freemarkerTool.processString("code-generator/jpa-new/service.ftl", params));
             //Util
             result.put("util", freemarkerTool.processString("code-generator/util/util.ftl", params));
-
             //jdbc template
             result.put("jtdao", freemarkerTool.processString("code-generator/jdbc-template/jtdao.ftl", params));
             result.put("jtdaoimpl", freemarkerTool.processString("code-generator/jdbc-template/jtdaoimpl.ftl", params));
@@ -96,6 +95,13 @@ public class IndexController {
             //mybatis plus
             result.put("pluscontroller", freemarkerTool.processString("code-generator/mybatis-plus/pluscontroller.ftl", params));
             result.put("plusmapper", freemarkerTool.processString("code-generator/mybatis-plus/plusmapper.ftl", params));
+
+            //sql generate
+            result.put("select", freemarkerTool.processString("sql-generator/pgsql/select.ftl", params));
+            result.put("insert", freemarkerTool.processString("sql-generator/pgsql/insert.ftl", params));
+            result.put("update", freemarkerTool.processString("sql-generator/pgsql/update.ftl", params));
+            result.put("delete", freemarkerTool.processString("sql-generator/pgsql/delete.ftl", params));
+
 
             // 计算,生成代码行数
             int lineNum = 0;
