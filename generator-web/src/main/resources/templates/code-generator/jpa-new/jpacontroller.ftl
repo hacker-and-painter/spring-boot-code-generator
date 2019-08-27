@@ -28,7 +28,7 @@ public class ${classInfo.className}Controller {
 
     @ApiOperation("新增或编辑")
     @PostMapping("/save")
-    public Object save(${classInfo.className} ${classInfo.className?uncap_first}){
+    public Object save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
     }
 

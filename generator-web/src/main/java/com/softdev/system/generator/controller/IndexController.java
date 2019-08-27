@@ -95,13 +95,16 @@ public class IndexController {
             //mybatis plus
             result.put("pluscontroller", freemarkerTool.processString("code-generator/mybatis-plus/pluscontroller.ftl", params));
             result.put("plusmapper", freemarkerTool.processString("code-generator/mybatis-plus/plusmapper.ftl", params));
-
             //sql generate
             result.put("select", freemarkerTool.processString("sql-generator/pgsql/select.ftl", params));
             result.put("insert", freemarkerTool.processString("sql-generator/pgsql/insert.ftl", params));
             result.put("update", freemarkerTool.processString("sql-generator/pgsql/update.ftl", params));
             result.put("delete", freemarkerTool.processString("sql-generator/pgsql/delete.ftl", params));
-
+            //jpa-new
+            result.put("jpa-rest-entity", freemarkerTool.processString("code-generator/jpa-rest/entity.ftl", params));
+            result.put("jpa-rest-repository", freemarkerTool.processString("code-generator/jpa-rest/repository.ftl", params));
+            result.put("jpa-rest-controller", freemarkerTool.processString("code-generator/jpa-rest/jpacontroller.ftl", params));
+            result.put("jpa-rest-service", freemarkerTool.processString("code-generator/jpa-rest/service.ftl", params));
 
             // 计算,生成代码行数
             int lineNum = 0;
@@ -118,7 +121,6 @@ public class IndexController {
             log.error(e.getMessage(), e);
             return new ReturnT<>(ReturnT.FAIL_CODE, "表结构解析失败" + e.getMessage());
         }
-
     }
 
     /**

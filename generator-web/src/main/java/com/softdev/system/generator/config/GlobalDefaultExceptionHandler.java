@@ -11,12 +11,11 @@ import com.softdev.system.generator.util.ApiReturnUtil;
 
 @ControllerAdvice
 public class GlobalDefaultExceptionHandler {
-	
+
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public ApiReturnObject defaultExceptionHandler(HttpServletRequest req,Exception e) {
 		e.printStackTrace();
 		return ApiReturnUtil.error("服务器异常",e.getMessage());
 	}
-	
 }
