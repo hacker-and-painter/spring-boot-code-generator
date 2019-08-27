@@ -289,6 +289,8 @@ CREATE TABLE `userinfo` (
                 </div>
                 <div class="btn-group" role="group" aria-label="First group">
                     <button type="button" class="btn btn-default generator" id="jpa-rest-entity">jpa-entity</button>
+                    <button type="button" class="btn btn-default generator" id="jpa-rest-dto">jpa-dto</button>
+                    <button type="button" class="btn btn-default generator" id="jpa-rest-vo">jpa-vo</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-repository">repository</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-service">service</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-controller">controller</button>

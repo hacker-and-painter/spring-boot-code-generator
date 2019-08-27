@@ -49,6 +49,13 @@ public class ${classInfo.className}Service {
     }
 
     /**
+    * 更新
+    */
+    public void update(${classInfo.className} ${classInfo.className?uncap_first}) {
+        ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
+    }
+
+    /**
     * 删除
     */
     public void deleteById(String id){
@@ -61,9 +68,9 @@ public class ${classInfo.className}Service {
     public Object find(String id){
         Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
         if(${classInfo.className?uncap_first}.isPresent()){
-            return new Result(true,StatusCode.OK,"成功",${classInfo.className?uncap_first}.get());
+            return new Result(true,StatusCode.OK.getCode(),"成功",${classInfo.className?uncap_first}.get());
         }else{
-            return new Result(true,StatusCode.ERROR,"没有找到该对象");
+            return new Result(true,StatusCode.ERROR.getCode(),"没有找到该对象");
         }
     }
 
@@ -83,7 +90,7 @@ public class ${classInfo.className}Service {
     /**
     * 分页查询
     */
-    public Object list(${classInfo.className} ${classInfo.className?uncap_first},
+    public Page<${classInfo.className}> list(${classInfo.className} ${classInfo.className?uncap_first},
                          int pageNumber,
                          int pageSize) {
 
@@ -103,6 +110,6 @@ public class ${classInfo.className}Service {
     */
     @Transactional
     public void delete(List<String> ids) {
-        busCaseRepository.deleteByIdIn(ids);
+        ${classInfo.className?uncap_first}Repository.deleteByIdIn(ids);
     }
 }

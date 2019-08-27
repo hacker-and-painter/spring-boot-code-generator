@@ -100,8 +100,10 @@ public class IndexController {
             result.put("insert", freemarkerTool.processString("sql-generator/pgsql/insert.ftl", params));
             result.put("update", freemarkerTool.processString("sql-generator/pgsql/update.ftl", params));
             result.put("delete", freemarkerTool.processString("sql-generator/pgsql/delete.ftl", params));
-            //jpa-new
+            //jpa-restful
             result.put("jpa-rest-entity", freemarkerTool.processString("code-generator/jpa-rest/entity.ftl", params));
+            result.put("jpa-rest-dto", freemarkerTool.processString("code-generator/jpa-rest/dto.ftl", params));
+            result.put("jpa-rest-vo", freemarkerTool.processString("code-generator/jpa-rest/vo.ftl", params));
             result.put("jpa-rest-repository", freemarkerTool.processString("code-generator/jpa-rest/repository.ftl", params));
             result.put("jpa-rest-controller", freemarkerTool.processString("code-generator/jpa-rest/jpacontroller.ftl", params));
             result.put("jpa-rest-service", freemarkerTool.processString("code-generator/jpa-rest/service.ftl", params));

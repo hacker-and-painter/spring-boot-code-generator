@@ -40,16 +40,16 @@ public class ${classInfo.className}Controller {
 
     @ApiOperation("新增")
     @PostMapping
-    public Result save(@RequestBody BusCase busCase){
-        ${classInfo.className?uncap_first}Service.save(busCase);
+    public Result save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+        ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
         return new Result(true, StatusCode.OK.getCode(), "添加成功");
     }
 
     @ApiOperation("更新")
     @PutMapping("/{caseId}")
-    public Result update(@PathVariable("caseId") String id, @RequestBody BusCase busCase){
-        busCase.setId(id);
-        ${classInfo.className?uncap_first}Service.update(busCase);
+    public Result update(@PathVariable("caseId") String id, @RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+        ${classInfo.className?uncap_first}.setId(id);
+        ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
         return new Result(true, StatusCode.OK.getCode(), "修改成功");
     }
 
