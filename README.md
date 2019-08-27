@@ -41,6 +41,10 @@
 
 ![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190707211702.png)
 
+#### jpa rest (2019-8-27)
+
+![](https://raw.githubusercontent.com/gaohanghang/images/master/img20190827105024.png)
+
 #### bean get set
 
 项目中经常会遇到需要 get bean 所有属性和 set bean 所有属性的情况，添加此功能方便开发
