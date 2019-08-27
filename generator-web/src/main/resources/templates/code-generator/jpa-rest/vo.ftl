@@ -10,7 +10,7 @@ import java.util.List;
 * @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 **/
 @Data
-public class ${classInfo.className} implements Serializable {
+public class ${classInfo.className}VO implements Serializable {
 private static final long serialVersionUID = 1L;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
