@@ -68,9 +68,9 @@ public class ${classInfo.className}Service {
     public Object find(String id){
         Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
         if(${classInfo.className?uncap_first}.isPresent()){
-            return new Result(true,StatusCode.OK.getCode(),"成功",${classInfo.className?uncap_first}.get());
+            return new Result(true,ResultCode.SUCCESS.getCode(),"成功",${classInfo.className?uncap_first}.get());
         }else{
-            return new Result(true,StatusCode.ERROR.getCode(),"没有找到该对象");
+            return new Result(true,ResultCode.ERROR.getCode(),"没有找到该对象");
         }
     }
 
