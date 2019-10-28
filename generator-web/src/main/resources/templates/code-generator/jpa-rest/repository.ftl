@@ -22,4 +22,5 @@ import org.springframework.stereotype.Repository;
 public interface ${classInfo.className}Repository extends JpaRepository<${classInfo.className},String> {
 
     void deleteByIdIn(List<String> ids);
+
 }

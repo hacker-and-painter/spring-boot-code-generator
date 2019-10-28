@@ -41,6 +41,11 @@ public class ${classInfo.className}Controller {
     @ApiOperation("新增")
     @PostMapping
     public Result save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+<#list classInfo.fieldList as fieldItem >
+    <#if fieldItem.fieldName == 'isDelete'>
+        ${classInfo.className?uncap_first}.setIsDelete("false");
+    </#if>
+</#list>
         ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
         return new Result(true, ResultCode.SUCCESS.getCode(), "添加成功");
     }
@@ -74,4 +79,5 @@ public class ${classInfo.className}Controller {
         return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功",
         pageData);
     }
+
 }

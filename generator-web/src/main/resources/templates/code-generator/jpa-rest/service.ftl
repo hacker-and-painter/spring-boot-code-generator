@@ -112,4 +112,5 @@ public class ${classInfo.className}Service {
     public void delete(List<String> ids) {
         ${classInfo.className?uncap_first}Repository.deleteByIdIn(ids);
     }
+
 }

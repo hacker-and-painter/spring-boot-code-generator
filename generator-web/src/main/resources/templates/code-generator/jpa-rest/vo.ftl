@@ -22,7 +22,7 @@ private static final long serialVersionUID = 1L;
         private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
     </#list>
-    public ${classInfo.className}() {
+    public ${classInfo.className}VO() {
     }
 </#if>
 
