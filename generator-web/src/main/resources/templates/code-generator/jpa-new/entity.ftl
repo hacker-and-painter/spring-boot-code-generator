@@ -18,6 +18,7 @@ import java.util.List;
     </#if>
 </#list>
 public class ${classInfo.className} implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
