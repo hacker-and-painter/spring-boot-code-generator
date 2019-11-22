@@ -28,36 +28,34 @@ public class ${classInfo.className}Controller {
 
     @ApiOperation("查询所有")
     @GetMapping
-    public Result<List<${classInfo.className}>> findAll(){
-        List<${classInfo.className}> all = ${classInfo.className?uncap_first}Service.findAll();
-        return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功", all);
+    public Result findAll(){
+        return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功",  ${classInfo.className?uncap_first}Service.findAll());
     }
 
     @ApiOperation("通过id查询")
     @GetMapping("/{caseId}")
-    public Result<${classInfo.className}> findById(@PathVariable("caseId") String id){
-        ${classInfo.className} byId = ${classInfo.className?uncap_first}Service.findById(id);
-        return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功", );
+    public Result findById(@PathVariable("caseId") String id){
+        return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功", ${classInfo.className?uncap_first}Service.findById(id));
     }
 
     @ApiOperation("新增")
     @PostMapping
-    public Result<${classInfo.className}> save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+    public Result save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
 <#list classInfo.fieldList as fieldItem >
     <#if fieldItem.fieldName == 'isDelete'>
         ${classInfo.className?uncap_first}.setIsDelete("false");
     </#if>
 </#list>
-        ${classInfo.className} save = ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
-        return new Result(true, ResultCode.SUCCESS.getCode(), "添加成功", save);
+        ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
+        return new Result(true, ResultCode.SUCCESS.getCode(), "添加成功");
     }
 
     @ApiOperation("更新")
     @PutMapping("/{caseId}")
     public Result update(@PathVariable("caseId") String id, @RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
         ${classInfo.className?uncap_first}.setId(id);
-        ${classInfo.className} update = ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
-        return new Result(true, ResultCode.SUCCESS.getCode(), "修改成功", update);
+        ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
+        return new Result(true, ResultCode.SUCCESS.getCode(), "修改成功");
     }
 
     @ApiOperation("删除")
@@ -76,9 +74,10 @@ public class ${classInfo.className}Controller {
 
     @ApiOperation("分页查询")
     @PostMapping("/search/{page}/{size}")
-    public Result<Page<${classInfo.className}>> pageQuery(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}, @PathVariable(value = "page") int currentPage, @PathVariable(value = "size") int pageSize) {
-        Page<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Service.list(${classInfo.className?uncap_first}, currentPage, pageSize);
-        return new Result<Page<${classInfo.className}>>(true, ResultCode.SUCCESS.getCode(), "查询成功", pageData);
+    public Result pageQuery(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}, @PathVariable(value = "page") int currentPage, @PathVariable(value = "size") int pageSize) {
+    Page<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Service.list(${classInfo.className?uncap_first}, currentPage, pageSize);
+        return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功",
+        pageData);
     }
 
 }

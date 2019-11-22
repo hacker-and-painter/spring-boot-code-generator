@@ -30,21 +30,21 @@ public class ${classInfo.className}Service {
     /**
     * 查询所有
     */
-    public List<${classInfo.className}> findAll(){
+    public Object findAll(){
         return ${classInfo.className?uncap_first}Repository.findAll();
     }
 
     /**
     * 通过id查询
     */
-    public ${classInfo.className} findById(String id){
+    public Object findById(String id){
         return ${classInfo.className?uncap_first}Repository.findById(id).orElse(null);
     }
 
     /**
     * 新增
     */
-    public ${classInfo.className} save(${classInfo.className} ${classInfo.className?uncap_first}){
+    public Object save(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
     }
 
@@ -65,7 +65,7 @@ public class ${classInfo.className}Service {
     /**
     * 查询
     */
-    public ${classInfo.className} find(String id){
+    public Object find(String id){
         Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
         if(${classInfo.className?uncap_first}.isPresent()){
             return new Result(true,ResultCode.SUCCESS.getCode(),"成功",${classInfo.className?uncap_first}.get());
