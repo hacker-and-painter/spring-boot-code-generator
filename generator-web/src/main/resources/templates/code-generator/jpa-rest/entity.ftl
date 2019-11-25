@@ -11,7 +11,7 @@ import java.util.List;
  **/
 @Entity
 @Data
-@Table(name="${classInfo.tableName}")
+@Table(name = "${classInfo.tableName}")
 <#list classInfo.fieldList as fieldItem >
     <#if fieldItem.fieldName == 'createTime'>
 @EntityListeners(AuditingEntityListener.class)
