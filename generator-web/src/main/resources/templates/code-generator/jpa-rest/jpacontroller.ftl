@@ -21,6 +21,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/${classInfo.className?uncap_first}")
+@Api(tags = {"  "})
 public class ${classInfo.className}Controller {
 
     @Autowired
@@ -30,14 +31,14 @@ public class ${classInfo.className}Controller {
     @GetMapping
     public Result<List<${classInfo.className}>> findAll(){
         List<${classInfo.className}> all = ${classInfo.className?uncap_first}Service.findAll();
-        return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功", all);
+        return new Result<List<${classInfo.className}>>(true, ResultCode.SUCCESS.getCode(), "查询成功", all);
     }
 
     @ApiOperation("通过id查询")
-    @GetMapping("/{caseId}")
-    public Result<${classInfo.className}> findById(@PathVariable("caseId") String id){
+    @GetMapping("/{id}")
+    public Result<${classInfo.className}> findById(@PathVariable("id") String id){
         ${classInfo.className} byId = ${classInfo.className?uncap_first}Service.findById(id);
-        return new Result(true, ResultCode.SUCCESS.getCode(), "查询成功", );
+        return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "查询成功", byId);
     }
 
     @ApiOperation("新增")
@@ -49,21 +50,20 @@ public class ${classInfo.className}Controller {
     </#if>
 </#list>
         ${classInfo.className} save = ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
-        return new Result(true, ResultCode.SUCCESS.getCode(), "添加成功", save);
+        return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "添加成功", save);
     }
 
     @ApiOperation("更新")
-    @PutMapping("/{caseId}")
-    public Result update(@PathVariable("caseId") String id, @RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
-        ${classInfo.className?uncap_first}.setId(id);
-        ${classInfo.className} update = ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
-        return new Result(true, ResultCode.SUCCESS.getCode(), "修改成功", update);
+    @PutMapping("/{id}")
+    public Result<${classInfo.className}> update(@PathVariable("id") String id, @RequestBody ${classInfo.className}RO ${classInfo.className?uncap_first}RO){
+        ${classInfo.className} update = ${classInfo.className?uncap_first}Service.update(id, ${classInfo.className?uncap_first}RO);
+        return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "更新成功", update);
     }
 
     @ApiOperation("删除")
-    @DeleteMapping("/{caseId}")
-    public Result deleteByID(@PathVariable("caseId") String id){
-        ${classInfo.className?uncap_first}Service.deleteById(id);
+    @DeleteMapping("/{id}")
+    public Result deleteByID(@PathVariable("id") String id){
+        ${classInfo.className?uncap_first}Service.softDeleteById(id);
         return new Result(true, ResultCode.SUCCESS.getCode(), "删除成功");
     }
 
