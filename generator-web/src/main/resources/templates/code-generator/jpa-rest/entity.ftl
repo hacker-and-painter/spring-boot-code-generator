@@ -17,6 +17,7 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
     </#if>
 </#list>
+@Where(clause="is_delete=false") // 执行的所有查询将只显示未删除行
 public class ${classInfo.className} implements Serializable {
 
     private static final long serialVersionUID = 1L;

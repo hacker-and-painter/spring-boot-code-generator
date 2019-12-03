@@ -53,13 +53,14 @@ public class ${classInfo.className}Service {
     */
     public ${classInfo.className} update(String id, ${classInfo.className}RO ${classInfo.className?uncap_first}RO) {
         ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.findById(id).get();
-        ${classInfo.className?uncap_first}.setId(id);
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem>
-        <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime'>
+        <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' >
             <#continue>
         </#if>
-        ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}RO.get${fieldItem.fieldName?cap_first}());
+        if(${classInfo.className?uncap_first}RO.get${fieldItem.fieldName?cap_first}() != null) {
+            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}RO.get${fieldItem.fieldName?cap_first}());
+        }
     </#list>
 </#if>
         return ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
@@ -77,7 +78,7 @@ public class ${classInfo.className}Service {
     */
     public void softDeleteById(String id){
         ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.findById(id).get();
-        ${classInfo.className?uncap_first}.setIsDelete("true");
+        ${classInfo.className?uncap_first}.setIsDelete(true);
         ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
     }
 
@@ -132,7 +133,7 @@ public class ${classInfo.className}Service {
     public void delete(List<String> ids) {
         for (String id : ids) {
             ${classInfo.className} byId = ${classInfo.className?uncap_first}Repository.findById(id).get();
-            byId.setIsDelete("true");
+            byId.setIsDelete(true);
             ${classInfo.className?uncap_first}Repository.save(byId);
         }
     }

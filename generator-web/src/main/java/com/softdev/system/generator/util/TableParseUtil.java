@@ -173,6 +173,8 @@ public class TableParseUtil {
                     //2018-11-22 lshz0088 处理字段类型的时候，不严谨columnLine.contains(" int") 类似这种的，可在前后适当加一些空格之类的加以区分，否则当我的字段包含这些字符的时候，产生类型判断问题。
                     if (columnLine.contains(" int") || columnLine.contains("tinyint") || columnLine.contains("smallint")) {
                         fieldClass = Integer.class.getSimpleName();
+                    } else if (columnLine.contains("bool")) {
+                        fieldClass = Boolean.class.getSimpleName();
                     } else if (columnLine.contains("bigint")) {
                         fieldClass = Long.class.getSimpleName();
                     } else if (columnLine.contains("float")) {

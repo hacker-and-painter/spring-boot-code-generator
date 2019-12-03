@@ -46,7 +46,7 @@ public class ${classInfo.className}Controller {
     public Result<${classInfo.className}> save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
 <#list classInfo.fieldList as fieldItem >
     <#if fieldItem.fieldName == 'isDelete'>
-        ${classInfo.className?uncap_first}.setIsDelete("false");
+        ${classInfo.className?uncap_first}.setIsDelete(false);
     </#if>
 </#list>
         ${classInfo.className} save = ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
