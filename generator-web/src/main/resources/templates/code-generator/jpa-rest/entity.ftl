@@ -27,7 +27,7 @@ public class ${classInfo.className} implements Serializable {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
 <#list classInfo.fieldList as fieldItem >
-    @ApiModelProperty("${fieldItem.fieldComment}")
+    @ApiModelProperty(value = "${fieldItem.fieldComment}", example = "2019-01-01 22:18:59")
     <#if fieldItem.fieldClass == 'LocalDateTime'>
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     </#if>

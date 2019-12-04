@@ -27,12 +27,12 @@ public class ${classInfo.className}Controller {
     @Autowired
     private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
 
-    @ApiOperation("查询所有")
-    @GetMapping
-    public Result<List<${classInfo.className}>> findAll(){
-        List<${classInfo.className}> all = ${classInfo.className?uncap_first}Service.findAll();
-        return new Result<List<${classInfo.className}>>(true, ResultCode.SUCCESS.getCode(), "查询成功", all);
-    }
+    //@ApiOperation("查询所有")
+    //@GetMapping
+    //public Result<List<${classInfo.className}>> findAll(){
+    //    List<${classInfo.className}> all = ${classInfo.className?uncap_first}Service.findAll();
+    //    return new Result<List<${classInfo.className}>>(true, ResultCode.SUCCESS.getCode(), "查询成功", all);
+    //}
 
     @ApiOperation("通过id查询")
     @GetMapping("/{id}")

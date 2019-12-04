@@ -114,13 +114,18 @@ public class ${classInfo.className}Service {
                          int pageNumber,
                          int pageSize) {
 
-            //创建匹配器，需要查询条件请修改此处代码
+            // 创建匹配器，需要查询条件请修改此处代码
             //ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("createTime", "updateTime").withMatcher("name", match -> match.contains());
             ExampleMatcher matcher = ExampleMatcher.matchingAll();
 
-            //创建实例
+            // 创建实例
             Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
-            //分页构造
+            //// 排序
+            //Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+            //// 分页构造
+            //Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);
+
+            // 分页构造
             Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);
 
             return ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
