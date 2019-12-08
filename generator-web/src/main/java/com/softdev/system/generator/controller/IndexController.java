@@ -104,6 +104,8 @@ public class IndexController {
             result.put("jpa-rest-entity", freemarkerTool.processString("code-generator/jpa-rest/entity.ftl", params));
             result.put("jpa-rest-dto", freemarkerTool.processString("code-generator/jpa-rest/dto.ftl", params));
             result.put("jpa-rest-vo", freemarkerTool.processString("code-generator/jpa-rest/vo.ftl", params));
+            result.put("jpa-rest-add-ro", freemarkerTool.processString("code-generator/jpa-rest/addro.ftl", params));
+            result.put("jpa-rest-update-ro", freemarkerTool.processString("code-generator/jpa-rest/updatero.ftl", params));
             result.put("jpa-rest-repository", freemarkerTool.processString("code-generator/jpa-rest/repository.ftl", params));
             result.put("jpa-rest-controller", freemarkerTool.processString("code-generator/jpa-rest/jpacontroller.ftl", params));
             result.put("jpa-rest-service", freemarkerTool.processString("code-generator/jpa-rest/service.ftl", params));

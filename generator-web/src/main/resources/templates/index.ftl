@@ -291,6 +291,8 @@ CREATE TABLE `userinfo` (
                     <button type="button" class="btn btn-default generator" id="jpa-rest-entity">jpa-entity</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-dto">DTO</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-vo">VO</button>
+                    <button type="button" class="btn btn-default generator" id="jpa-rest-add-ro">addRO</button>
+                    <button type="button" class="btn btn-default generator" id="jpa-rest-update-ro">updateRO</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-repository">repository</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-service">service</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-controller">controller</button>

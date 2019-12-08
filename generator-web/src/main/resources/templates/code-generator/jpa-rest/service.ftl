@@ -51,15 +51,15 @@ public class ${classInfo.className}Service {
     /**
     * 更新
     */
-    public ${classInfo.className} update(String id, ${classInfo.className}RO ${classInfo.className?uncap_first}RO) {
+    public ${classInfo.className} update(String id, ${classInfo.className}UpdateRO ${classInfo.className?uncap_first}UpdateRO) {
         ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.findById(id).get();
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem>
         <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' >
             <#continue>
         </#if>
-        if(${classInfo.className?uncap_first}RO.get${fieldItem.fieldName?cap_first}() != null) {
-            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}RO.get${fieldItem.fieldName?cap_first}());
+        if(${classInfo.className?uncap_first}UpdateRO.get${fieldItem.fieldName?cap_first}() != null) {
+            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}UpdateRO.get${fieldItem.fieldName?cap_first}());
         }
     </#list>
 </#if>
@@ -137,9 +137,12 @@ public class ${classInfo.className}Service {
     @Transactional
     public void delete(List<String> ids) {
         for (String id : ids) {
-            ${classInfo.className} byId = ${classInfo.className?uncap_first}Repository.findById(id).get();
-            byId.setIsDelete(true);
-            ${classInfo.className?uncap_first}Repository.save(byId);
+            Optional<${classInfo.className}> byIdOptional = ${classInfo.className?uncap_first}Repository.findById(id);
+            if (byIdOptional.isPresent()) {
+                ${classInfo.className} byId = byIdOptional.get();
+                byId.setIsDelete(true);
+                ${classInfo.className?uncap_first}Repository.save(byId);
+            }
         }
     }
 

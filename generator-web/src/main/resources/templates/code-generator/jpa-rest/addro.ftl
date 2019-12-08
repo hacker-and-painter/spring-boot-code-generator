@@ -10,13 +10,13 @@ import java.util.List;
 * @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 **/
 @Data
-public class ${classInfo.className}RO implements Serializable {
+public class ${classInfo.className}AddRO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
-    <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime'>
+    <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' || fieldItem.fieldName = 'createBy' || fieldItem.fieldName = 'updateBy'>
         <#continue>
     </#if>
     @ApiModelProperty("${fieldItem.fieldComment}")
@@ -26,7 +26,7 @@ public class ${classInfo.className}RO implements Serializable {
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
     </#list>
-    public ${classInfo.className}RO() {
+    public ${classInfo.className}AddRO() {
     }
 </#if>
 

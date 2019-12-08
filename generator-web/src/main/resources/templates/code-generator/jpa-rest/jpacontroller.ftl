@@ -43,7 +43,9 @@ public class ${classInfo.className}Controller {
 
     @ApiOperation("新增")
     @PostMapping
-    public Result<${classInfo.className}> save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+    public Result<${classInfo.className}> save(@RequestBody ${classInfo.className}AddRO ${classInfo.className?uncap_first}AddRO){
+        ${classInfo.className} ${classInfo.className?uncap_first} = new ${classInfo.className}();
+        BeanUtils.copyProperties(${classInfo.className?uncap_first}AddRO, ${classInfo.className?uncap_first});
 <#list classInfo.fieldList as fieldItem >
     <#if fieldItem.fieldName == 'isDelete'>
         ${classInfo.className?uncap_first}.setIsDelete(false);
