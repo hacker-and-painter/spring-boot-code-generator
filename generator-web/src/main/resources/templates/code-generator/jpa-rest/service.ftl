@@ -110,7 +110,7 @@ public class ${classInfo.className}Service {
     /**
     * 分页查询
     */
-    public Page<${classInfo.className}> list(${classInfo.className} ${classInfo.className?uncap_first},
+    public Page<${classInfo.className}> list(${classInfo.className}PageRO ${classInfo.className?uncap_first}PageRO,
                          int pageNumber,
                          int pageSize) {
 
@@ -118,15 +118,25 @@ public class ${classInfo.className}Service {
             //ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("createTime", "updateTime").withMatcher("name", match -> match.contains());
             ExampleMatcher matcher = ExampleMatcher.matchingAll();
 
+            ${classInfo.className} ${classInfo.className?uncap_first} = new ${classInfo.className}();
+    <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+        <#list classInfo.fieldList as fieldItem>
+            <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' >
+                <#continue>
+            </#if>
+            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}PageRO.get${fieldItem.fieldName?cap_first}());
+        </#list>
+    </#if>
+
             // 创建实例
             Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
-            //// 排序
-            //Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
-            //// 分页构造
-            //Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);
-
+            // 排序
+            Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
             // 分页构造
-            Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);
+            Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);
+
+            //// 分页构造
+            //Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);
 
             return ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
     }

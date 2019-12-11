@@ -12,9 +12,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
-*  2019-2-11 liutf WebMvcConfig 整合 cors 和 SpringMvc MessageConverter
-*/
+ * 2019-2-11 liutf WebMvcConfig 整合 cors 和 SpringMvc MessageConverter
+ */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -55,5 +56,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/");
 
         registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");    }
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
 }
