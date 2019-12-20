@@ -46,11 +46,6 @@ public class ${classInfo.className}Controller {
     public Result<${classInfo.className}> save(@RequestBody ${classInfo.className}AddRO ${classInfo.className?uncap_first}AddRO){
         ${classInfo.className} ${classInfo.className?uncap_first} = new ${classInfo.className}();
         BeanUtils.copyProperties(${classInfo.className?uncap_first}AddRO, ${classInfo.className?uncap_first});
-<#list classInfo.fieldList as fieldItem >
-    <#if fieldItem.fieldName == 'isDelete'>
-        ${classInfo.className?uncap_first}.setIsDelete(false);
-    </#if>
-</#list>
         ${classInfo.className} save = ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
         return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "添加成功", save);
     }
@@ -58,7 +53,7 @@ public class ${classInfo.className}Controller {
     @ApiOperation("更新")
     @PutMapping("/{id}")
     public Result<${classInfo.className}> update(@PathVariable("id") String id, @RequestBody ${classInfo.className}UpdateRO ${classInfo.className?uncap_first}UpdateRO){
-        ${classInfo.className} update = ${classInfo.className?uncap_first}Service.update(id, ${classInfo.className?uncap_first}RO);
+        ${classInfo.className} update = ${classInfo.className?uncap_first}Service.update(id, ${classInfo.className?uncap_first}UpdateRO);
         return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "更新成功", update);
     }
 

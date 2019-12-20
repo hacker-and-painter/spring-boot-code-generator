@@ -45,6 +45,11 @@ public class ${classInfo.className}Service {
     * 新增
     */
     public ${classInfo.className} save(${classInfo.className} ${classInfo.className?uncap_first}){
+<#list classInfo.fieldList as fieldItem >
+    <#if fieldItem.fieldName == 'isDelete'>
+        ${classInfo.className?uncap_first}.setIsDelete(false);
+    </#if>
+</#list>
         return ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
     }
 

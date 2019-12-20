@@ -18,4 +18,5 @@ public class GlobalDefaultExceptionHandler {
 		e.printStackTrace();
 		return ApiReturnUtil.error("服务器异常",e.getMessage());
 	}
+
 }
