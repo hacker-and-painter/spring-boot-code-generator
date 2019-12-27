@@ -95,7 +95,7 @@ public class ${classInfo.className}Service {
         if(${classInfo.className?uncap_first}.isPresent()){
             return new Result(true,ResultCode.SUCCESS.getCode(),"成功",${classInfo.className?uncap_first}.get());
         }else{
-            return new Result(true,ResultCode.ERROR.getCode(),"没有找到该对象");
+            return new Result(true,ResultCode.FAILED.getCode(),"没有找到该对象");
         }
     }
 
