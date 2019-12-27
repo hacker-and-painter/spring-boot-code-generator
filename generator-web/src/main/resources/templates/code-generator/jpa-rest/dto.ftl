@@ -20,6 +20,9 @@ private static final long serialVersionUID = 1L;
     <#if fieldItem.fieldClass == 'LocalDateTime'>
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     </#if>
+    <#if fieldItem.fieldClass == 'LocalDate'>
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    </#if>
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
     </#list>

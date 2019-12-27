@@ -10,23 +10,26 @@ import java.util.List;
 * @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 **/
 @Data
-public class ${classInfo.className}PageRO implements Serializable {
+public class ${classInfo.className}AddParam implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
-    <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' >
+    <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' || fieldItem.fieldName = 'createBy' || fieldItem.fieldName = 'updateBy'>
         <#continue>
     </#if>
     @ApiModelProperty("${fieldItem.fieldComment}")
     <#if fieldItem.fieldClass == 'LocalDateTime'>
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     </#if>
+    <#if fieldItem.fieldClass == 'LocalDate'>
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    </#if>
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
     </#list>
-    public ${classInfo.className}PageRO() {
+    public ${classInfo.className}AddParam() {
     }
 </#if>
 

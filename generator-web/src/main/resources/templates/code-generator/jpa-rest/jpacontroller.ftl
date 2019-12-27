@@ -43,17 +43,17 @@ public class ${classInfo.className}Controller {
 
     @ApiOperation("新增")
     @PostMapping
-    public Result<${classInfo.className}> save(@RequestBody ${classInfo.className}AddRO ${classInfo.className?uncap_first}AddRO){
+    public Result<${classInfo.className}> save(@RequestBody ${classInfo.className}AddParam ${classInfo.className?uncap_first}AddParam){
         ${classInfo.className} ${classInfo.className?uncap_first} = new ${classInfo.className}();
-        BeanUtils.copyProperties(${classInfo.className?uncap_first}AddRO, ${classInfo.className?uncap_first});
+        BeanUtils.copyProperties(${classInfo.className?uncap_first}AddParam, ${classInfo.className?uncap_first});
         ${classInfo.className} save = ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
         return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "添加成功", save);
     }
 
     @ApiOperation("更新")
     @PutMapping("/{id}")
-    public Result<${classInfo.className}> update(@PathVariable("id") String id, @RequestBody ${classInfo.className}UpdateRO ${classInfo.className?uncap_first}UpdateRO){
-        ${classInfo.className} update = ${classInfo.className?uncap_first}Service.update(id, ${classInfo.className?uncap_first}UpdateRO);
+    public Result<${classInfo.className}> update(@PathVariable("id") String id, @RequestBody ${classInfo.className}UpdateParam ${classInfo.className?uncap_first}UpdateParam){
+        ${classInfo.className} update = ${classInfo.className?uncap_first}Service.update(id, ${classInfo.className?uncap_first}UpdateParam);
         return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "更新成功", update);
     }
 
@@ -73,8 +73,8 @@ public class ${classInfo.className}Controller {
 
     @ApiOperation("分页查询")
     @PostMapping("/search/{page}/{size}")
-    public Result<Page<${classInfo.className}>> pageQuery(@RequestBody ${classInfo.className}PageRO ${classInfo.className?uncap_first}PageRO, @PathVariable(value = "page") int currentPage, @PathVariable(value = "size") int pageSize) {
-        Page<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Service.list(${classInfo.className?uncap_first}PageRO, currentPage, pageSize);
+    public Result<Page<${classInfo.className}>> pageQuery(@RequestBody ${classInfo.className}PageParam ${classInfo.className?uncap_first}PageParam, @PathVariable(value = "page") int currentPage, @PathVariable(value = "size") int pageSize) {
+        Page<${classInfo.className}> pageData = ${classInfo.className?uncap_first}Service.list(${classInfo.className?uncap_first}PageParam, currentPage, pageSize);
         return new Result<Page<${classInfo.className}>>(true, ResultCode.SUCCESS.getCode(), "查询成功", pageData);
     }
 

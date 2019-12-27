@@ -56,15 +56,15 @@ public class ${classInfo.className}Service {
     /**
     * 更新
     */
-    public ${classInfo.className} update(String id, ${classInfo.className}UpdateRO ${classInfo.className?uncap_first}UpdateRO) {
+    public ${classInfo.className} update(String id, ${classInfo.className}UpdateParam ${classInfo.className?uncap_first}UpdateParam) {
         ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.findById(id).get();
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem>
         <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' >
             <#continue>
         </#if>
-        if(${classInfo.className?uncap_first}UpdateRO.get${fieldItem.fieldName?cap_first}() != null) {
-            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}UpdateRO.get${fieldItem.fieldName?cap_first}());
+        if(${classInfo.className?uncap_first}UpdateParam.get${fieldItem.fieldName?cap_first}() != null) {
+            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}UpdateParam.get${fieldItem.fieldName?cap_first}());
         }
     </#list>
 </#if>
@@ -115,7 +115,7 @@ public class ${classInfo.className}Service {
     /**
     * 分页查询
     */
-    public Page<${classInfo.className}> list(${classInfo.className}PageRO ${classInfo.className?uncap_first}PageRO,
+    public Page<${classInfo.className}> list(${classInfo.className}PageParam ${classInfo.className?uncap_first}PageParam,
                          int pageNumber,
                          int pageSize) {
 
@@ -129,7 +129,7 @@ public class ${classInfo.className}Service {
             <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime' || fieldItem.fieldName = 'isDelete' >
                 <#continue>
             </#if>
-            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}PageRO.get${fieldItem.fieldName?cap_first}());
+            ${classInfo.className?uncap_first}.set${fieldItem.fieldName?cap_first}(${classInfo.className?uncap_first}PageParam.get${fieldItem.fieldName?cap_first}());
         </#list>
     </#if>
 

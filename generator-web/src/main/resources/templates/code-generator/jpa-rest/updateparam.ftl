@@ -10,7 +10,7 @@ import java.util.List;
 * @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 **/
 @Data
-public class ${classInfo.className}UpdateRO implements Serializable {
+public class ${classInfo.className}UpdateParam implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class ${classInfo.className}UpdateRO implements Serializable {
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
     </#list>
-    public ${classInfo.className}UpdateRO() {
+    public ${classInfo.className}UpdateParam() {
     }
 </#if>
 

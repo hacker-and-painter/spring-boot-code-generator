@@ -104,9 +104,9 @@ public class IndexController {
             result.put("jpa-rest-entity", freemarkerTool.processString("code-generator/jpa-rest/entity.ftl", params));
             result.put("jpa-rest-dto", freemarkerTool.processString("code-generator/jpa-rest/dto.ftl", params));
             result.put("jpa-rest-vo", freemarkerTool.processString("code-generator/jpa-rest/vo.ftl", params));
-            result.put("jpa-rest-add-ro", freemarkerTool.processString("code-generator/jpa-rest/addro.ftl", params));
-            result.put("jpa-rest-update-ro", freemarkerTool.processString("code-generator/jpa-rest/updatero.ftl", params));
-            result.put("jpa-rest-page-ro", freemarkerTool.processString("code-generator/jpa-rest/pagero.ftl", params));
+            result.put("jpa-rest-add-param", freemarkerTool.processString("code-generator/jpa-rest/addparam.ftl", params));
+            result.put("jpa-rest-update-param", freemarkerTool.processString("code-generator/jpa-rest/updateparam.ftl", params));
+            result.put("jpa-rest-page-param", freemarkerTool.processString("code-generator/jpa-rest/pageparam.ftl", params));
             result.put("projection", freemarkerTool.processString("code-generator/jpa-rest/projection.ftl", params));
             result.put("jpa-rest-repository", freemarkerTool.processString("code-generator/jpa-rest/repository.ftl", params));
             result.put("jpa-rest-controller", freemarkerTool.processString("code-generator/jpa-rest/jpacontroller.ftl", params));
