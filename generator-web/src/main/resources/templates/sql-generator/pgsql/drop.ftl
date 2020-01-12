@@ -1,0 +1,2 @@
+DROP TABLE ${classInfo.tableName};
+

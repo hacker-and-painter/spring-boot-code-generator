@@ -58,13 +58,27 @@ public class ${classInfo.className}Controller {
     }
 
     @ApiOperation("删除")
+    @DeleteMapping("/{caseId}")
+    public Result deleteByID(@PathVariable("caseId") String id){
+        ${classInfo.className?uncap_first}Service.deleteById(id);
+        return new Result(true, ResultCode.SUCCESS.getCode(), "删除成功");
+    }
+
+    @ApiOperation("批量删除")
+    @PostMapping("/delete")
+    public Result delete(@RequestBody List<String> ids){
+        ${classInfo.className?uncap_first}Service.delete(ids);
+        return new Result(true, ResultCode.SUCCESS.getCode(), "删除成功");
+    }
+
+    @ApiOperation("软删除")
     @DeleteMapping("/{id}")
     public Result deleteByID(@PathVariable("id") String id){
         ${classInfo.className?uncap_first}Service.softDeleteById(id);
         return new Result(true, ResultCode.SUCCESS.getCode(), "删除成功");
     }
 
-    @ApiOperation("批量删除")
+    @ApiOperation("批量软删除")
     @PostMapping("/delete")
     public Result delete(@RequestBody List<String> ids){
         ${classInfo.className?uncap_first}Service.delete(ids);

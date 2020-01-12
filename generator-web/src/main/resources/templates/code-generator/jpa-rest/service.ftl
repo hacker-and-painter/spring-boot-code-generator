@@ -88,6 +88,29 @@ public class ${classInfo.className}Service {
     }
 
     /**
+    * 批量删除
+    */
+    @Transactional
+    public void delete(List<String> ids) {
+        ${classInfo.className?uncap_first}Repository.deleteByIdIn(ids);
+    }
+
+    /**
+    * 批量软删除
+    */
+    @Transactional
+    public void delete(List<String> ids) {
+        for (String id : ids) {
+            Optional<${classInfo.className}> byIdOptional = ${classInfo.className?uncap_first}Repository.findById(id);
+            if (byIdOptional.isPresent()) {
+            ${classInfo.className} byId = byIdOptional.get();
+            byId.setIsDelete(true);
+            ${classInfo.className?uncap_first}Repository.save(byId);
+            }
+        }
+    }
+
+    /**
     * 查询
     */
     public Result find(String id){
@@ -144,21 +167,6 @@ public class ${classInfo.className}Service {
             //Pageable pageable = PageRequest.of(pageNumber - 1,pageSize);
 
             return ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
-    }
-
-    /**
-    * 批量删除
-    */
-    @Transactional
-    public void delete(List<String> ids) {
-        for (String id : ids) {
-            Optional<${classInfo.className}> byIdOptional = ${classInfo.className?uncap_first}Repository.findById(id);
-            if (byIdOptional.isPresent()) {
-                ${classInfo.className} byId = byIdOptional.get();
-                byId.setIsDelete(true);
-                ${classInfo.className?uncap_first}Repository.save(byId);
-            }
-        }
     }
 
 }

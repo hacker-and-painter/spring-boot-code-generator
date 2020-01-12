@@ -22,11 +22,13 @@ public class ${classInfo.className} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+<#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+<#list classInfo.fieldList as fieldItem >
+    <#if fieldItem.fieldName == 'id'>
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-<#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
-<#list classInfo.fieldList as fieldItem >
+    </#if>
     <#if fieldItem.fieldClass == 'LocalDateTime'>
     @ApiModelProperty(value = "${fieldItem.fieldComment}", example = "2019-01-01 22:18:59")
     <#else>
@@ -44,6 +46,7 @@ public class ${classInfo.className} implements Serializable {
     <#if fieldItem.fieldName == 'updateTime'>
     @LastModifiedDate
     </#if>
+    @Column(name = "${fieldItem.columnName}")
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 
 </#list>

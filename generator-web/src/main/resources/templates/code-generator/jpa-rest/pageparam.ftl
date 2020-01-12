@@ -1,8 +1,8 @@
-import java.io.Serializable;
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
 * @Description
