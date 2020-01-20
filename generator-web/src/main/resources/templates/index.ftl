@@ -298,6 +298,7 @@ CREATE TABLE `userinfo` (
                     <button type="button" class="btn btn-default generator" id="jpa-rest-repository">repository</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-service">service</button>
                     <button type="button" class="btn btn-default generator" id="jpa-rest-controller">controller</button>
+                    <button type="button" class="btn btn-default generator" id="jpa-rest-test">test</button>
                 </div>
             </div>
         </div>

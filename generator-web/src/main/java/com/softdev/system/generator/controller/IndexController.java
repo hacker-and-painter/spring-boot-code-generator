@@ -111,6 +111,8 @@ public class IndexController {
             result.put("jpa-rest-repository", freemarkerTool.processString("code-generator/jpa-rest/repository.ftl", params));
             result.put("jpa-rest-controller", freemarkerTool.processString("code-generator/jpa-rest/jpacontroller.ftl", params));
             result.put("jpa-rest-service", freemarkerTool.processString("code-generator/jpa-rest/service.ftl", params));
+            result.put("jpa-rest-test", freemarkerTool.processString("code-generator/jpa-rest/test.ftl", params));
+
 
             // 计算,生成代码行数
             int lineNum = 0;
