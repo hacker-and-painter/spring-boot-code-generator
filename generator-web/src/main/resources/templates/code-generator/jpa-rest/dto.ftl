@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
-* @Description
-* @Author ${authorName}
-* @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
-**/
+ * @description
+ * @author ${authorName}
+ * @date ${.now?string('yyyy-MM-dd HH:mm:ss')}
+ */
 @Data
 public class ${classInfo.className}DTO implements Serializable {
 

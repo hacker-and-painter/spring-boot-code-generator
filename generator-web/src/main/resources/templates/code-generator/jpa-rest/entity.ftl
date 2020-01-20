@@ -8,7 +8,7 @@ import java.util.List;
  * @Description
  * @Author ${authorName}
  * @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
- **/
+ */
 @Entity
 @Data
 @Table(name = "${classInfo.tableName}")

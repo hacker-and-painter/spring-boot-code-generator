@@ -44,9 +44,7 @@ public class ${classInfo.className}Controller {
     @ApiOperation("新增")
     @PostMapping
     public Result<${classInfo.className}> save(@RequestBody ${classInfo.className}AddParam ${classInfo.className?uncap_first}AddParam){
-        ${classInfo.className} ${classInfo.className?uncap_first} = new ${classInfo.className}();
-        BeanUtils.copyProperties(${classInfo.className?uncap_first}AddParam, ${classInfo.className?uncap_first});
-        ${classInfo.className} save = ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
+        ${classInfo.className} save = ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first}AddParam);
         return new Result<${classInfo.className}>(true, ResultCode.SUCCESS.getCode(), "添加成功", save);
     }
 

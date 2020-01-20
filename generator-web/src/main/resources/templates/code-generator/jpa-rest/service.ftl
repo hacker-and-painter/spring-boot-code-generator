@@ -44,7 +44,9 @@ public class ${classInfo.className}Service {
     /**
     * 新增
     */
-    public ${classInfo.className} save(${classInfo.className} ${classInfo.className?uncap_first}){
+    public ${classInfo.className} save(${classInfo.className}AddParam ${classInfo.className?uncap_first}AddParam){
+        ${classInfo.className} ${classInfo.className?uncap_first} = new ${classInfo.className}();
+        BeanUtils.copyProperties(${classInfo.className?uncap_first}AddParam, ${classInfo.className?uncap_first});
 <#list classInfo.fieldList as fieldItem >
     <#if fieldItem.fieldName == 'isDelete'>
         ${classInfo.className?uncap_first}.setIsDelete(false);
