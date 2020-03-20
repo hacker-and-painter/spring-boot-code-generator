@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description
+ * @Description ${classInfo.classComment}
  * @Author ${authorName}
  * @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
  */

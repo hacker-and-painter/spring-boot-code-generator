@@ -9,7 +9,6 @@ import java.util.List;
 * @Author ${authorName}
 * @Date ${.now?string('yyyy-MM-dd HH:mm:ss')}
 **/
-@Data
 public interface ${classInfo.className}Projection {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
