@@ -20,8 +20,6 @@ public interface ${classInfo.className}Projection {
     ${fieldItem.fieldClass} get${fieldItem.fieldName}();
 
     </#list>
-    public ${classInfo.className}VO() {
-    }
 </#if>
 
 }
