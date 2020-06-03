@@ -17,7 +17,7 @@ public interface ${classInfo.className}Projection {
     <#if fieldItem.fieldClass == 'LocalDateTime'>
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     </#if>
-    ${fieldItem.fieldClass} get${fieldItem.fieldName}();
+    ${fieldItem.fieldClass} get${fieldItem.fieldName?cap_first}();
 
     </#list>
 </#if>

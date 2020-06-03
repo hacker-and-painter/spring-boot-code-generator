@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +39,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         fastConverter.setSupportedMediaTypes(fastMediaTypes);
 
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setCharset(Charset.forName("UTF-8"));
+        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
         fastConverter.setFastJsonConfig(fastJsonConfig);
 
         //StringHttpMessageConverter
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-        stringConverter.setDefaultCharset(Charset.forName("UTF-8"));
+        stringConverter.setDefaultCharset(StandardCharsets.UTF_8);
         stringConverter.setSupportedMediaTypes(fastMediaTypes);
         converters.add(stringConverter);
         converters.add(fastConverter);
