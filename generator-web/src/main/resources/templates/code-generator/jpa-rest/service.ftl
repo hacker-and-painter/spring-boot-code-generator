@@ -161,7 +161,7 @@ public class ${classInfo.className}Service {
             // 创建实例
             Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
             // 排序
-            Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+            Sort sort = new Sort(Sort.Direction.DESC, "createTime");
             // 分页构造
             Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);
 
