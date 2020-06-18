@@ -16,9 +16,9 @@ public class ${classInfo.className}VO implements Serializable {
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
     <#list classInfo.fieldList as fieldItem >
-    <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime'>
-        <#continue>
-    </#if>
+<#--    <#if fieldItem.fieldName == 'id' || fieldItem.fieldName == 'createTime' || fieldItem.fieldName = 'updateTime'>-->
+<#--        <#continue>-->
+<#--    </#if>-->
     @ApiModelProperty("${fieldItem.fieldComment}")
     <#if fieldItem.fieldClass == 'LocalDateTime'>
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
