@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,6 +135,7 @@ public class IndexController {
     /**
      * 输入表名和字段名生成建表语句(暂只支出postgresql)
      * TODO 支持生成mysql建表语句
+     *
      * @param tableName 表名
      * @param fields    字段名
      * @return
@@ -141,14 +143,113 @@ public class IndexController {
     @GetMapping("/sqlGenerate")
     @ResponseBody
     @ApiOperation("输入表名和字段名生成建表语句")
-    public String sqlGenerate(@RequestParam String tableName, String fields) {
+    public String sqlGenerate(@RequestParam String tableName, String fields, String comments, String types, String lengths) {
+        tableName = tableName.toLowerCase();
+
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("DROP TABLE IF EXISTS \"public\".\"").append(tableName).append("\";\n");
         stringBuilder.append("CREATE TABLE \"public\".\"").append(tableName).append("\" (\n").append("\"id\" varchar(255) NOT NULL,\n");
 
-        String[] fieldsArr = fields.split(",");
-        for (String fieldName : fieldsArr) {
-            stringBuilder.append("\"").append(fieldName).append("\"").append(" varchar(255),\n");
+        String[] fieldsArr = null;
+        String[] commentsArr = null;
+        String[] lengthsArr = null;
+        String[] typesArr = null;
 
+        // 字段
+        if (!StringUtils.isBlank(fields)) {
+            if (fields.contains(" ")) {
+                fieldsArr = fields.split(" ");
+            } else {
+                fieldsArr = fields.split(",");
+            }
+        }
+
+        // 类型
+        if (StringUtils.isNotBlank(types)) {
+            if (types.contains(" ")) {
+                typesArr = types.split(" ");
+            } else {
+                typesArr = types.split(",");
+            }
+        }
+
+        // 注释
+        if (!StringUtils.isBlank(comments)) {
+            if (comments.contains(" ")) {
+                commentsArr = comments.split(" ");
+            } else {
+                commentsArr = comments.split(",");
+            }
+        }
+
+        // 长度
+        if (StringUtils.isNotBlank(lengths)) {
+            if (lengths.contains(" ")) {
+                lengthsArr = lengths.split(" ");
+            } else {
+                lengthsArr = lengths.split(",");
+            }
+        }
+
+
+        //for (String fieldName : fieldsArr) {
+        //    if ("id".equals(fieldName.toLowerCase())) {
+        //        continue;
+        //    }
+        //    stringBuilder.append("\"").append(fieldName.toLowerCase()).append("\"").append(" varchar(255),\n");
+        //}
+
+        for (int i = 0; i < fieldsArr.length; i++) {
+            if ("id".equals(fieldsArr[i].toLowerCase())) {
+                continue;
+            }
+
+            if (typesArr != null) {
+                if (lengthsArr != null) {
+                    if (StringUtils.isNotBlank(typesArr[i]) && StringUtils.isNotBlank(lengthsArr[i])) {
+                        String type = conversionType(typesArr[i]);
+                        if (fieldsArr[i].toLowerCase().endsWith("_time")) {
+                            stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
+                        } else {
+                            stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" " + type + "(" + lengthsArr[i] + "),\n");
+                        }
+                    }
+                } else {
+                    if (fieldsArr[i].toLowerCase().endsWith("_time")) {
+                        stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
+                    } else {
+                        stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar(" + lengthsArr[i] + "),\n");
+                    }
+                }
+            } else {
+                if (fieldsArr[i].toLowerCase().endsWith("_time")) {
+                    stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
+                } else {
+                    stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar(255),\n");
+                }
+            }
+
+
+            //if (lengthsArr[i] != null) {
+            //    if (typesArr != null) {
+            //        if (typesArr[i] != null) {
+            //            String type = conversionType(typesArr[i]);
+            //                stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" "+ type +"("+ lengthsArr[i] +"),\n");
+            //        }  else {
+            //            if (fieldsArr[i].toLowerCase().endsWith("_time")) {
+            //                stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
+            //            }
+            //        }
+            //    } else {
+            //        if (fieldsArr[i].toLowerCase().endsWith("_time")) {
+            //            stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
+            //        } else {
+            //            stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar("+ lengthsArr[i] +"),\n");
+            //        }
+            //    }
+            //} else {
+            //    stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar(255),\n");
+            //}
         }
 
         stringBuilder.append("CONSTRAINT ").append("\"").append(tableName).append("_pkey").append("\"").append(" PRIMARY KEY (\"id\")\n" +
@@ -156,9 +257,22 @@ public class IndexController {
 
         stringBuilder.append("ALTER TABLE \"public\".\"").append(tableName).append("\"\n").append("OWNER TO \"postgres\";\n");
 
-        stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"id\" IS '主键';\n");
-
+        for (int i = 0; i < fieldsArr.length; i++) {
+            if (commentsArr[i] != null) {
+                stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"").append(fieldsArr[i].toLowerCase()).append("\" IS '").append(commentsArr[i]).append("';\n");
+            }
+        }
 
         return stringBuilder.toString();
     }
+
+    public String conversionType(String typeAbbreviation) {
+        if ("C".equals(typeAbbreviation)) {
+            return "varchar";
+        } else if ("N".equals(typeAbbreviation)) {
+            return "int4";
+        }
+        return null;
+    }
+
 }
