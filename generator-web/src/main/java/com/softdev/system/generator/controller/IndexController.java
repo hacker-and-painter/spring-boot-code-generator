@@ -133,18 +133,21 @@ public class IndexController {
     }
 
     /**
-     * 输入表名和字段名生成建表语句(暂只支出postgresql)
+     * 输入表名和字段名生成建表语句(暂只支持 postgresql )
      * TODO 支持生成mysql建表语句
      *
      * @param tableName 表名
      * @param fields    字段名
-     * @return
+     * @param comments 注释
+     * @param types 数据类型
+     * @param lengths 数据项长度
+     * @return sql 语句
      */
     @GetMapping("/sqlGenerate")
     @ResponseBody
     @ApiOperation("输入表名和字段名生成建表语句")
-    public String sqlGenerate(@RequestParam String tableName, String fields, String comments, String types, String lengths) {
-        tableName = tableName.toLowerCase();
+    public String sqlGenerate(@RequestParam String tableName, String fields, String comments, String types, String lengths, String explanations) {
+        tableName = "t_" + tableName.toLowerCase();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("DROP TABLE IF EXISTS \"public\".\"").append(tableName).append("\";\n");
@@ -154,9 +157,10 @@ public class IndexController {
         String[] commentsArr = null;
         String[] lengthsArr = null;
         String[] typesArr = null;
+        String[] explanationsArr = null;
 
         // 字段
-        if (!StringUtils.isBlank(fields)) {
+        if (StringUtils.isNotBlank(fields)) {
             if (fields.contains(" ")) {
                 fieldsArr = fields.split(" ");
             } else {
@@ -174,7 +178,7 @@ public class IndexController {
         }
 
         // 注释
-        if (!StringUtils.isBlank(comments)) {
+        if (StringUtils.isNotBlank(comments)) {
             if (comments.contains(" ")) {
                 commentsArr = comments.split(" ");
             } else {
@@ -191,13 +195,9 @@ public class IndexController {
             }
         }
 
-
-        //for (String fieldName : fieldsArr) {
-        //    if ("id".equals(fieldName.toLowerCase())) {
-        //        continue;
-        //    }
-        //    stringBuilder.append("\"").append(fieldName.toLowerCase()).append("\"").append(" varchar(255),\n");
-        //}
+        if (StringUtils.isNotBlank(explanations)) {
+            explanationsArr = explanations.split(" ");
+        }
 
         for (int i = 0; i < fieldsArr.length; i++) {
             if ("id".equals(fieldsArr[i].toLowerCase())) {
@@ -211,7 +211,11 @@ public class IndexController {
                         if (fieldsArr[i].toLowerCase().endsWith("_time")) {
                             stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
                         } else {
-                            stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" " + type + "(" + lengthsArr[i] + "),\n");
+                            if ("int4".equals(type)) {
+                                stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" " + type + ",\n");
+                            } else {
+                                stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" " + type + "(" + lengthsArr[i] + "),\n");
+                            }
                         }
                     }
                 } else {
@@ -228,28 +232,6 @@ public class IndexController {
                     stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar(255),\n");
                 }
             }
-
-
-            //if (lengthsArr[i] != null) {
-            //    if (typesArr != null) {
-            //        if (typesArr[i] != null) {
-            //            String type = conversionType(typesArr[i]);
-            //                stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" "+ type +"("+ lengthsArr[i] +"),\n");
-            //        }  else {
-            //            if (fieldsArr[i].toLowerCase().endsWith("_time")) {
-            //                stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
-            //            }
-            //        }
-            //    } else {
-            //        if (fieldsArr[i].toLowerCase().endsWith("_time")) {
-            //            stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
-            //        } else {
-            //            stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar("+ lengthsArr[i] +"),\n");
-            //        }
-            //    }
-            //} else {
-            //    stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar(255),\n");
-            //}
         }
 
         stringBuilder.append("CONSTRAINT ").append("\"").append(tableName).append("_pkey").append("\"").append(" PRIMARY KEY (\"id\")\n" +
@@ -258,14 +240,23 @@ public class IndexController {
         stringBuilder.append("ALTER TABLE \"public\".\"").append(tableName).append("\"\n").append("OWNER TO \"postgres\";\n");
 
         for (int i = 0; i < fieldsArr.length; i++) {
-            if (commentsArr[i] != null) {
-                stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"").append(fieldsArr[i].toLowerCase()).append("\" IS '").append(commentsArr[i]).append("';\n");
+            if (commentsArr != null && commentsArr[i] != null) {
+                if (explanationsArr!= null && explanationsArr[i] != null) {
+                    stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"").append(fieldsArr[i].toLowerCase()).append("\" IS '").append(commentsArr[i]).append(" ").append(explanationsArr[i]).append("';\n");
+                } else {
+                    stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"").append(fieldsArr[i].toLowerCase()).append("\" IS '").append(commentsArr[i]).append("';\n");
+                }
             }
         }
 
         return stringBuilder.toString();
     }
 
+    /**
+     * 转换数据类型
+     * @param typeAbbreviation
+     * @return
+     */
     public String conversionType(String typeAbbreviation) {
         if ("C".equals(typeAbbreviation)) {
             return "varchar";
