@@ -51,8 +51,8 @@ public class ${classInfo.className}Controller {
     }
 
     @ApiOperation("更新")
-    @PutMapping("/{caseId}")
-    public Result update(@PathVariable("caseId") String id, @RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+    @PutMapping("/{id}")
+    public Result update(@PathVariable("id") String id, @RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
         ${classInfo.className?uncap_first}.setId(id);
         ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
         return new Result(true, ResultCode.SUCCESS.getCode(), "修改成功");

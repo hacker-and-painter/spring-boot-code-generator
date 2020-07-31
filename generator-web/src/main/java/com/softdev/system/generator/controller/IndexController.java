@@ -11,9 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -138,9 +136,9 @@ public class IndexController {
      *
      * @param tableName 表名
      * @param fields    字段名
-     * @param comments 注释
-     * @param types 数据类型
-     * @param lengths 数据项长度
+     * @param comments  注释
+     * @param types     数据类型
+     * @param lengths   数据项长度
      * @return sql 语句
      */
     @GetMapping("/sqlGenerate")
@@ -222,7 +220,7 @@ public class IndexController {
                     if (fieldsArr[i].toLowerCase().endsWith("_time")) {
                         stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" timestamp(6),\n");
                     } else {
-                        stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar(" + lengthsArr[i] + "),\n");
+                        stringBuilder.append("\"").append(fieldsArr[i].toLowerCase()).append("\"").append(" varchar(").append(lengthsArr[i]).append("),\n");
                     }
                 }
             } else {
@@ -241,7 +239,7 @@ public class IndexController {
 
         for (int i = 0; i < fieldsArr.length; i++) {
             if (commentsArr != null && commentsArr[i] != null) {
-                if (explanationsArr!= null && explanationsArr[i] != null) {
+                if (explanationsArr != null && explanationsArr[i] != null) {
                     stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"").append(fieldsArr[i].toLowerCase()).append("\" IS '").append(commentsArr[i]).append(" ").append(explanationsArr[i]).append("';\n");
                 } else {
                     stringBuilder.append("COMMENT ON COLUMN \"public\".\"").append(tableName).append("\".\"").append(fieldsArr[i].toLowerCase()).append("\" IS '").append(commentsArr[i]).append("';\n");
@@ -254,6 +252,7 @@ public class IndexController {
 
     /**
      * 转换数据类型
+     *
      * @param typeAbbreviation
      * @return
      */
