@@ -65,4 +65,18 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 		return result;
 	}
 
+	public PageInfo<${classInfo.className}> pageList(${classInfo.className}PageParam ${classInfo.className?uncap_first}PageParam, int offset, int pageSize) {
+		PageHelper.startPage(offset, pageSize);
+		List<${classInfo.className}> ${classInfo.className?uncap_first}List = ${classInfo.className?uncap_first}Mapper.pageList(${classInfo.className?uncap_first}PageParam);
+		List<${classInfo.className?uncap_first}VO> ${classInfo.className?uncap_first}VOList = new ArrayList<>();
+		for (${classInfo.className} ${classInfo.className?uncap_first} :${classInfo.className?uncap_first}List) {
+			${classInfo.className}VO ${classInfo.className?uncap_first}VO = new ${classInfo.className?uncap_first}VO();
+			BeanUtils.copyProperties(${classInfo.className?uncap_first}, ${classInfo.className?uncap_first}VO);
+			caseInfoVOList.add(${classInfo.className?uncap_first}VO);
+		}
+		PageInfo pageResult = new PageInfo<>(${classInfo.className?uncap_first}List);
+		pageResult.setList(${classInfo.className?uncap_first}VOList);
+		return pageResult;
+	}
+
 }

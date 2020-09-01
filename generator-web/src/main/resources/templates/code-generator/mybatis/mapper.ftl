@@ -48,6 +48,13 @@ public interface ${classInfo.className}Mapper {
     List<${classInfo.className}> pageList(int offset,int pagesize);
 
     /**
+    * [查询] 分页查询
+    * @author ${authorName}
+    * @date ${.now?string('yyyy/MM/dd')}
+    **/
+    List<${classInfo.className}> pageList(@Param("${classInfo.className?uncap_first}PageParam") ${classInfo.className}PageParam ${classInfo.className?uncap_first});
+
+    /**
     * [查询] 分页查询 count
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}

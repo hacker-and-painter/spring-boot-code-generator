@@ -60,15 +60,20 @@ public class ${classInfo.className}Controller {
         return ${classInfo.className?uncap_first}Service.load(id);
     }
 
+    @RequestMapping("/pageList")
+    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
+    @RequestParam(required = false, defaultValue = "10") int pagesize) {
+        return ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
+    }
+
     /**
     * [查询] 分页查询
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    @RequestMapping("/pageList")
-    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                        @RequestParam(required = false, defaultValue = "10") int pagesize) {
-        return ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
+    @RequestMapping("/pageList/{page}/{size}")
+    public Result<PageInfo<${classInfo.className}>> pageList(@RequestBody ${classInfo.className}PageParam ${classInfo.className?uncap_first}PageParam,  @PathVariable(value = "page") int currentPage, @PathVariable(value = "size") int pageSize) {
+        return Result.success(${classInfo.className?uncap_first}Service.pageList(${classInfo.className?uncap_first}PageParam, currentPage, pageSize));
     }
 
 }

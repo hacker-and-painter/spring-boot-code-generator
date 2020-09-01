@@ -81,6 +81,35 @@
         LIMIT ${r"#{offset}"}, ${r"#{pageSize}"}
     </select>
 
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM ${classInfo.tableName}
+        <where>
+            <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+                <#list classInfo.fieldList as fieldItem >
+                    <#if fieldItem.columnName != "id" >
+                    <#--<#if fieldItem.columnName="addtime" || fieldItem.columnName="updatetime" >
+                    ${r"<if test ='null != "}${fieldItem.fieldName}${r"'>"}
+                        NOW()<#if fieldItem_has_next>,</#if>
+                    ${r"</if>"}
+                    <#else>-->
+            <#if fieldItem.fieldClass == 'String'>
+                ${r"<if test ='null != "}${classInfo.className?uncap_first}PageParam.${fieldItem.fieldName} and "" != ${classInfo.className?uncap_first}PageParam.${fieldItem.fieldName}  ${r"'>"}
+                and ${fieldItem.columnName} = ${r"#{"}${classInfo.className?uncap_first}PageParam.${fieldItem.fieldName}${r"}"}
+                ${r"</if>"}
+            <#else>
+                ${r"<if test ='null != "}${classInfo.className?uncap_first}PageParam.${fieldItem.fieldName}${r"'>"}
+                and ${fieldItem.columnName} = ${r"#{"}${classInfo.className?uncap_first}PageParam.${fieldItem.fieldName}${r"}"}
+                ${r"</if>"}
+            </#if>
+
+                    <#--</#if>-->
+                    </#if>
+                </#list>
+            </#if>
+        </where>
+    </select>
+
     <select id="pageListCount" resultType="java.lang.Integer">
         SELECT count(1)
         FROM ${classInfo.tableName}
